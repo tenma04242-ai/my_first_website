@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webマーケ・ECコンサルタント</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Shippori+Mincho:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f2ed;
+    --accent: #c8a96e;
+    --accent-dark: #9e7d45;
+    --muted: #6b6560;
+    --line: rgba(10,10,10,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-dark);
+  }
+
+  .hero-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 440px;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    width: fit-content;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary svg { transition: transform 0.3s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 4rem;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.15) 0%, transparent 70%);
+  }
+
+  .hero-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-stat {
+    background: rgba(255,255,255,0.04);
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .hero-stat-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .hero-tagline {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 2;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+  }
+
+  /* SERVICES */
+  .section {
+    padding: 8rem 6rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  .section-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .service-card {
+    background: var(--paper);
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+
+  .service-card:hover { background: #f0ece5; }
+  .service-card:hover::after { width: 100%; }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .service-icon svg { width: 22px; height: 22px; }
+
+  .service-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .service-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 2rem;
+  }
+
+  .service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-list li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .service-list li::before {
+    content: '';
+    display: block;
+    width: 16px; height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* PROCESS */
+  .process-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8rem 6rem;
+  }
+
+  .process-section .section-num { color: var(--accent); }
+  .process-section .section-title { color: var(--paper); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 4rem;
+  }
+
+  .process-step {
+    background: var(--ink);
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+
+  .step-num {
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .step-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .step-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 2;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    padding: 8rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .contact-left .section-title { margin-bottom: 1.5rem; }
+
+  .contact-desc {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 3rem;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input, .form-textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 0;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .form-textarea { resize: none; height: 100px; }
+
+  .btn-submit {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: fit-content;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.8s ease 0.1s both; }
+  .hero-title { animation: fadeUp 0.8s ease 0.25s both; }
+  .hero-desc { animation: fadeUp 0.8s ease 0.4s both; }
+  .btn-primary { animation: fadeUp 0.8s ease 0.55s both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 5rem 2rem 3rem; border-right: none; border-bottom: 1px solid var(--line); }
+    .hero-right { padding: 3rem 2rem 4rem; }
+    .section { padding: 5rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-section { padding: 5rem 2rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .contact-section { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+    footer { padding: 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">YOUR NAME</a>
+  <ul class="nav-links">
+    <li><a href="#services">サービス</a></li>
+    <li><a href="#process">進め方</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Webマーケ & ECコンサルタント</p>
+    <h1 class="hero-title">売上を、<br><em>戦略で</em><br>変える。</h1>
+    <p class="hero-desc">Webマーケティング・EC事業の専門家として、貴社の課題に向き合い、数字で結果を出すコンサルティングを提供します。</p>
+    <a href="#contact" class="btn-primary">
+      無料相談を予約する
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-grid">
+      <div class="hero-stat">
+        <span class="hero-stat-num">+180%</span>
+        <span class="hero-stat-label">平均売上改善率</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">50+</span>
+        <span class="hero-stat-label">支援実績</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">5年</span>
+        <span class="hero-stat-label">業界経験</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">95%</span>
+        <span class="hero-stat-label">顧客継続率</span>
+      </div>
+    </div>
+    <p class="hero-tagline">データと経験に基づく戦略で、<br>EC・Webビジネスの成長を加速させます。</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <span class="section-num">01 — Services</span>
+    <h2 class="section-title">提供サービス</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f5f2ed" stroke-width="1.5">
+          <path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/>
+          <circle cx="7" cy="5" r="1" fill="#f5f2ed"/>
+          <circle cx="7" cy="12" r="1" fill="#f5f2ed"/>
+          <circle cx="7" cy="19" r="1" fill="#f5f2ed"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Webマーケティング</h3>
+      <p class="service-desc">SEO・広告・SNSを組み合わせた統合戦略で、集客から成約まで一貫してサポートします。</p>
+      <ul class="service-list">
+        <li>SEO戦略・コンテンツマーケティング</li>
+        <li>リスティング・SNS広告運用</li>
+        <li>アクセス解析・改善提案</li>
+        <li>ランディングページ最適化（LPO）</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f5f2ed" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </div>
+      <h3 class="service-name">ECコンサルティング</h3>
+      <p class="service-desc">EC事業の立ち上げから成長フェーズまで、売上・利益の最大化を実現する戦略を設計します。</p>
+      <ul class="service-list">
+        <li>EC戦略立案・事業計画策定</li>
+        <li>商品ページ・CVR改善</li>
+        <li>カート離脱・リピート率改善</li>
+        <li>モール運営（Amazon / 楽天 等）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="section-header">
+    <span class="section-num">02 — Process</span>
+    <h2 class="section-title">コンサルの進め方</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-name">無料ヒアリング</div>
+      <p class="step-desc">現状の課題・目標・予算を丁寧にお聞きします。初回は完全無料です。</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-name">現状分析</div>
+      <p class="step-desc">データ・競合・市場を分析し、課題の根本原因を明らかにします。</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-name">戦略提案</div>
+      <p class="step-desc">具体的な施策・スケジュール・KPIを設定した戦略をご提案します。</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-name">実行・改善</div>
+      <p class="step-desc">施策を実行しながら定期的に効果を検証し、継続的に改善します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <div class="section-header" style="margin-bottom:1.5rem;">
+      <span class="section-num">03 — Contact</span>
+    </div>
+    <h2 class="section-title" style="margin-bottom:1.5rem;">まずは、<br>お気軽にご相談ください。</h2>
+    <p class="contact-desc">初回相談は無料です。売上を伸ばしたい、EC事業を強化したい、Webマーケを見直したい——どんなお悩みでも歓迎します。</p>
+  </div>
+  <div class="contact-right">
+    <form class="contact-form">
+      <div class="form-group">
+        <label class="form-label">お名前</label>
+        <input type="text" class="form-input" placeholder="山田 太郎">
+      </div>
+      <div class="form-group">
+        <label class="form-label">メールアドレス</label>
+        <input type="email" class="form-input" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">会社名（任意）</label>
+        <input type="text" class="form-input" placeholder="株式会社〇〇">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ご相談内容</label>
+        <textarea class="form-textarea" placeholder="お気軽にご記入ください…"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">送信する</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">YOUR NAME</span>
+  <span class="footer-copy">© 2026 All rights reserved.</span>
+</footer>
+
+</body>
+</html>
